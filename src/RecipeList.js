@@ -1,8 +1,9 @@
 import React from "react";
+import RecipeView from "./RecipeView";
 
-function RecipeList({ recipes, onDelete }) {
+function RecipeList({ recipes, deleteRecipe }) { //removed <div className="recipe-list">
   return (
-    <div className="recipe-list">
+    <>  
       <table>
         <thead>
           <tr>
@@ -15,22 +16,20 @@ function RecipeList({ recipes, onDelete }) {
           </tr>
         </thead>
         <tbody>
-          {recipes.map((recipe, index) => (
-            <tr key={index}>
-              <td>{recipe.name}</td>
-              <td>{recipe.cuisine}</td>
-              <td><img src={recipe.photo} alt={recipe.name}/></td>
-              <td>{recipe.ingredients}</td>
-              <td>{recipe.preparation}</td>
-              <td>
-                <button name="delete" onClick={() => onDelete(recipe)}>Delete</button>
-              </td>
-            </tr>
+        {recipes.map((recipe, index) => (
+            <RecipeView
+              deleteRecipe={() => deleteRecipe(index)}
+              key={index}
+              recipe={recipe}
+            />
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 }
 
 export default RecipeList;
+
+  // ADDED: Display the list of recipes using the structure of table that is provided.
+  // ADDED: Create at least one additional component that is used by this component.
