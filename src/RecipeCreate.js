@@ -9,32 +9,7 @@ function RecipeCreate({createRecipe}) {
     ingredients: "",
     preparation: "",
   };
- /*
-  function validateForm(formData) {
-      const errors = {};
-    
-      // Check if name was entered
-      if (!validateExists(formData.get("name"))) {
-        errors.name = "Please enter a name";
-      }
-    
-      // Check if rating was entered
-      if (!validateExists(formData.get("cuisine"))) {
-        errors.rating = "Please enter a cuisine";
-      }
-
-      // Check if established date was entered
-      if (!validateExists(formData.get("ingredients"))) {
-        errors.established = "Please enter the ingredients";
-      }
-    
-      // Check if area was entered
-      if (!validateExists(formData.get("preparation"))) {
-        errors.area = "Please enter some preparation instructions";
-      }
-
-      return errors;
-    } */
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({ ...initialFormState });
   const handleChange = ({ target }) => {  
     const value = target.value;
@@ -43,16 +18,27 @@ function RecipeCreate({createRecipe}) {
       [target.name]: value,
     });
   };
-  const handleSubmit = (event) => {
+ const handleSubmit = (event) => {
     event.preventDefault();
-    createRecipe(formData);  
-    setFormData({ ...initialFormState });
+    if (
+      formData.name === "" ||
+      formData.cuisine === "" ||
+      formData.ingredients === "" ||
+      formData.preparation === ""
+    ) {
+      setError("Please fill in all the required fields.");
+    } else {
+      props.setRecipes([...props.recipes, formData]);
+      setFormData({ ...initialFormState });
+      setError("");
+    }
   };
   // ADDED: When the form is submitted, a new recipe should be created, and the form contents cleared.
   // ADDED: Add the required submit and change handlers
   
   return (
     <form name="create" onSubmit={handleSubmit}>
+     {error && <p style={{ color: "red" }}>{error}</p>}
       <table>
         <tbody>
           <tr>
