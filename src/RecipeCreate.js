@@ -28,7 +28,7 @@ function RecipeCreate({createRecipe}) {
     ) {
       setError("Please fill in all the required fields.");
     } else {
-      props.setRecipes([...props.recipes, formData]);
+      createRecipe(formData)
       setFormData({ ...initialFormState });
       setError("");
     }
