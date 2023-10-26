@@ -9,6 +9,32 @@ function RecipeCreate({createRecipe}) {
     ingredients: "",
     preparation: "",
   };
+ /*
+  function validateForm(formData) {
+      const errors = {};
+    
+      // Check if name was entered
+      if (!validateExists(formData.get("name"))) {
+        errors.name = "Please enter a name";
+      }
+    
+      // Check if rating was entered
+      if (!validateExists(formData.get("cuisine"))) {
+        errors.rating = "Please enter a cuisine";
+      }
+
+      // Check if established date was entered
+      if (!validateExists(formData.get("ingredients"))) {
+        errors.established = "Please enter the ingredients";
+      }
+    
+      // Check if area was entered
+      if (!validateExists(formData.get("preparation"))) {
+        errors.area = "Please enter some preparation instructions";
+      }
+
+      return errors;
+    } */
   const [formData, setFormData] = useState({ ...initialFormState });
   const handleChange = ({ target }) => {  
     const value = target.value;
